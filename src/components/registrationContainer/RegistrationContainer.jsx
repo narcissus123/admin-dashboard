@@ -1,88 +1,53 @@
-import React from "react";
-import { SubHeader } from "../layout/subHeader/SubHeader";
-import { Box, useTheme } from "@mui/material";
-import Tab from "@mui/material/Tab";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import CssBaseline from "@mui/material/CssBaseline";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import Slider from "./slider/Slider";
 import { SigninForm } from "./signinForm/SigninForm";
 import { SignupForm } from "./signupForm/SignupForm";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import { tokens } from "../../global/theme/Theme";
-import { getItem } from "../../core/services/storage/Storage";
+
+const theme = createTheme();
 
 export const RegistrationContainer = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const [value, setValue] = React.useState("1");
-  console.log("token: ", getItem("token"));
-  console.log("employee: ", getItem("employee"));
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [signUp, setSignUp] = React.useState(false);
+
   return (
-    <Box
-      sx={{
-        background: `#4cceac !important`,
-        borderBottom: "2px solid #ccc",
-        borderLeft: "2px solid #ccc",
-        borderRight: "1px solid #ccc",
-        borderTop: "1px solid #ccc",
-        width: "50%",
-        typography: "body1",
-        mt: "70px",
-        borderRadius: "10px",
-        overflow: "hidden",
-        mx: "auto",
-      }}
-    >
-      <TabContext value={value}>
-        <Box
-          color={colors.grey[100]}
-          sx={{
-            textAlign: "center",
-            borderBottom: 1,
-            borderColor: "divider",
-          }}
-        >
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab
-              label="Signin"
-              value="1"
-              sx={{
-                background: `secondary !important`,
-                mx: "auto",
-                width: "100%",
-                "&:hover": {
-                  color: "rgb(7, 177, 77)",
-                },
-              }}
-            />
-            <Tab
-              label="Signup"
-              value="2"
-              sx={{
-                mx: "auto",
-                width: "100%",
-                "&:hover": {
-                  color: "rgb(7, 177, 37)",
-                },
-              }}
-            />
-          </TabList>
-        </Box>
-        <TabPanel
-          value="1"
-          sx={{ background: `${colors.primary[400]} !important` }}
-        >
-          <SigninForm />
-        </TabPanel>
-        <TabPanel
-          value="2"
-          sx={{ background: `${colors.primary[400]} !important` }}
-        >
-          <SignupForm setValue={setValue} />
-        </TabPanel>
-      </TabContext>
-    </Box>
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
+        <Slider />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box sx={{ mt: 1 }}>
+              {signUp ? (
+                <SignupForm setSignUp={setSignUp} />
+              ) : (
+                <SigninForm setSignUp={setSignUp} />
+              )}
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 };
