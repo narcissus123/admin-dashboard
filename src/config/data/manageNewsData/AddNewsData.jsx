@@ -1,0 +1,35 @@
+export const addNewsData = [
+  {
+    fullWidth: true,
+    variant: "filled",
+    type: "text",
+    label: "Title",
+    name: "title",
+    sx: { gridColumn: "span 2" },
+    required: true,
+  },
+  {
+    fullWidth: true,
+    variant: "filled",
+    type: "text",
+    label: "Category",
+    name: "category",
+    sx: { gridColumn: "span 2" },
+    options: [
+      { value: "news", label: "news" },
+      { value: "article", label: "article" },
+    ],
+    required: true,
+  },
+  {
+    fullWidth: true,
+    variant: "filled",
+    type: "text",
+    label: "News",
+    name: "text",
+    sx: { gridColumn: "span 4", maxHeight: "108px", overflowY: "auto" },
+    required: true,
+    row: "5",
+    multiline: true,
+  },
+];
