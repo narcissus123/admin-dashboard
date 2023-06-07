@@ -5,7 +5,6 @@ const baseURL = Config.baseUrl;
 
 const instance = axios.create({
   baseURL,
-  // timeout: 10000,
 });
 
 //Response interceptor
@@ -22,8 +21,7 @@ instance.interceptors.response.use(
       error.response.status < 500;
     if (!expectedError) {
       const token = getItem("token");
-      console.log("token interceptor: ", token);
-      console.log("error.response:", error.response);
+
       return error.response;
     }
 
@@ -33,13 +31,13 @@ instance.interceptors.response.use(
 );
 
 //Request interceptor
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   (config) => {
     //Setting token before request is sent
     const token = getItem("token");
-    console.log("token interceptor: ", token);
+
     if (token) {
-      config.headers["token"] = token;
+      config.headers["x-auth-token"] = token;
     }
     return config;
   },
