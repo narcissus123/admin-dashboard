@@ -17,8 +17,29 @@ const removeItem = (key) => {
 
 // cleare all localStorage of this site
 const clearStorage = () => {
-  window.localStorage.clear();
   window.localStorage.removeItem("employee");
 };
 
-export { setItem, getItem, removeItem, clearStorage };
+const setEvent = (key, value) => {
+  localStorage.setItem(key, value);
+};
+
+const getEvent = (key) => {
+  if (localStorage.getItem(key)) return localStorage.getItem(key);
+  return false;
+};
+
+const removeEvent = (key) => {
+  if (getItem(key) === false) return false;
+  localStorage.removeItem(key);
+};
+
+export {
+  setItem,
+  getItem,
+  removeItem,
+  clearStorage,
+  setEvent,
+  getEvent,
+  removeEvent,
+};
