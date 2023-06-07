@@ -1,19 +1,24 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
-import { Box, Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import { Box, Button, Grid, Link } from "@mui/material";
+
 import { signupInputData } from "../../../config/data/signupInputData/SignupInputData";
 import { Input } from "../../common/inputs/SignupInput";
 import { CustomDatePicker } from "../../common/datePicker/CustomDatePicker";
+import { CustomPhoneInput } from "../../common/phoneInput/CustomPhoneInput";
+
 import { Dropdown } from "../../common/dropdown/Dropdown";
 import { SignUpEmployee } from "../../../core/services/api/Employee-authentication.api";
-import Snackbar from "@mui/material/Snackbar";
-import { Message } from "../../common/messages/Message";
-import dayjs from "dayjs";
 
-export const SignupForm = ({ setValue }) => {
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+// import ReactPhoneInput from "react-phone-input-material-ui";
+// import { TextField, withStyles } from "@material-ui/core";
+
+export const SignupForm = ({ setValue, setSignUp }) => {
   const formSchema = Yup.object().shape({
     fullName: Yup.string()
       .min(2, "Must be 2 characters or more.")
@@ -35,23 +40,22 @@ export const SignupForm = ({ setValue }) => {
     address: Yup.string().required("This is required"),
     role: Yup.string().required("This is required"),
   });
+
   return (
     <Formik
       initialValues={{
         fullName: "",
         email: "",
         password: "",
-        phoneNumber: 0,
+        phoneNumber: 2264638173,
         birthDate: "",
         nationalId: "",
         address: "",
         role: "admin",
-        profile: "",
+        profile: "image.png",
       }}
       validationSchema={formSchema}
       onSubmit={async (values) => {
-        console.log("values: ", values);
-        console.log("values: ", values);
         const inputObj = {
           fullName: values.fullName,
           email: values.email,
@@ -64,42 +68,24 @@ export const SignupForm = ({ setValue }) => {
           profile: values.profile,
         };
 
-        console.log("inputObj: ", inputObj);
         try {
           const response = await SignUpEmployee(inputObj);
 
           if (response.success) {
-            <Message
-              severity="success"
-              message="You are successfully signed up! Please sign in into your acount."
-              opening={true}
-              vertical="top"
-              horizontal="right"
-            />;
+            toast.success(
+              "You are successfully signed up! Please sign in into your acount."
+            );
 
-            console.log("response sign up: ", response);
-            setValue("1");
+            setSignUp(false);
           } else {
             if (response.message[0].eventId === 401) {
-              <Message
-                severity="error"
-                message="National id or email exists in our system."
-                opening={true}
-                vertical="top"
-                horizontal="right"
-              />;
+              toast.error("National id or email exists in our system.");
             } else {
-              <Message
-                severity="error"
-                message="Something went wrong! Please try again."
-                opening={true}
-                vertical="top"
-                horizontal="right"
-              />;
+              toast.error("Something went wrong! Please try again.");
             }
           }
         } catch (error) {
-          <Message severity="error" message={error} opening={true} />;
+          console.error(error);
         }
       }}
     >
@@ -130,6 +116,13 @@ export const SignupForm = ({ setValue }) => {
                   label={data.label}
                   required={data.required}
                 />
+              ) : data.name === "phoneNumber" ? (
+                <CustomPhoneInput
+                  key={index}
+                  name={data.name}
+                  label={data.label}
+                  required={data.required}
+                />
               ) : (
                 <Input
                   key={index}
@@ -143,12 +136,40 @@ export const SignupForm = ({ setValue }) => {
                 />
               );
             })}
+            {/* <PhoneInput
+              country={"us"}
+              // value={this.state.phone}
+              // onChange={(phone) => this.setState({ phone })}
+              value={phoneValue}
+              onChange={setPhoneValue} */}
+            {/* /> */}
+            {/* <ReactPhoneInput
+              value={value}
+              defaultCountry={defaultCountry || "gb"}
+              onChange={onChange}
+              inputClass={classes.field}
+              dropdownClass={classes.countryList}
+              component={TextField}
+            /> */}
           </Box>
           <Box display="flex" justifyContent="center" mt="20px">
-            <Button type="submit" color="secondary" variant="contained">
+            <Button
+              type="submit"
+              color="secondary"
+              variant="contained"
+              fullWidth
+              sx={{ mt: 3, mb: 2 }}
+            >
               sign up
             </Button>
           </Box>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link href="#" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       )}
     </Formik>
