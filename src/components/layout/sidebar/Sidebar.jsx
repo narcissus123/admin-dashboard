@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+
 import { tokens } from "../../../global/theme/Theme";
+import { getItem } from "../../../core/services/storage/Storage";
+
 import AdminPanelSettingsRoundedIcon from "@mui/icons-material/AdminPanelSettingsRounded";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -12,12 +15,16 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import LocalLibraryOutlinedIcon from "@mui/icons-material/LocalLibraryOutlined";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import EventIcon from "@mui/icons-material/Event";
 
 import "react-pro-sidebar/dist/css/styles.css";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -38,6 +45,8 @@ export const SidebarSection = () => {
   const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState("Dashboard");
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  let user = JSON.parse(getItem("employee"));
 
   return (
     <Box
@@ -86,7 +95,7 @@ export const SidebarSection = () => {
                     color: colors.grey[100],
                   }}
                 >
-                  ADMINIS
+                  {user.role === "admin" ? "ADMINIS" : "INSTRUCTORS"}
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -118,14 +127,14 @@ export const SidebarSection = () => {
                 fontWeight="bold"
                 sx={{ textAlign: "center" }}
               >
-                Ed Roh
+                {user.fullName.split(" ")[user.fullName.split.length - 1]}
               </Typography>
               <Typography
                 variant="h5"
                 color={colors.greenAccent[500]}
                 sx={{ textAlign: "center", m: "10px" }}
               >
-                VP Fancy Admin
+                {user.role}
               </Typography>
             </Box>
           )}
@@ -162,8 +171,15 @@ export const SidebarSection = () => {
             </Typography>
 
             <Item
-              title="Manage Employees"
-              to="/calendar"
+              title="Manage Instructors"
+              to="/instructors"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Manage Admins"
+              to="/admins"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -173,12 +189,12 @@ export const SidebarSection = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 10px" }}
             >
-              Course
+              Term / Lesson
             </Typography>
             <Item
               title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
+              to="/term"
+              icon={<MenuBookIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -188,12 +204,34 @@ export const SidebarSection = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 10px" }}
             >
-              Comments
+              Calendar
+            </Typography>
+
+            <Item
+              title="Event Calendar"
+              to="/calendar"
+              icon={<EventIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 10px" }}
+            >
+              Comments / Chats
             </Typography>
             <Item
               title="Comments"
-              to="/line"
+              to="/comment"
               icon={<CommentOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Chat"
+              to="/chat"
+              icon={<QuestionAnswerIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -206,7 +244,7 @@ export const SidebarSection = () => {
             </Typography>
             <Item
               title="News"
-              to="/geography"
+              to="/news"
               icon={<NewspaperOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
