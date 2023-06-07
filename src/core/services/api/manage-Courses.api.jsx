@@ -1,8 +1,8 @@
 import { instance } from "../interceptor/Interceptor";
 
-export const getCourses = async (studentId) => {
+export const getCourses = async () => {
   try {
-    const response = await instance.get(`/api/course/getall`);
+    const response = await instance.get("/api/course/getall");
     return response.data;
   } catch (error) {
     return error;
@@ -12,11 +12,23 @@ export const getCourses = async (studentId) => {
 // Add student to course.
 export const addStudentToCourse = async (studenId, courseId) => {
   try {
-    const response = await instance.get(
+    const response = await instance.post(
       `/api/course/addStudentToCourse/${studenId}`,
-      courseId
+      {
+        courseId: courseId,
+      }
     );
     return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+// Delete course by id.
+export const deleteCourseById = async (courseId) => {
+  try {
+    const response = await instance.delete(`/api/course/${courseId}`);
+    return response;
   } catch (error) {
     return error;
   }
@@ -25,9 +37,11 @@ export const addStudentToCourse = async (studenId, courseId) => {
 // Remove student from course.
 export const removeStudentFromCourse = async (studenId, courseId) => {
   try {
-    const response = await instance.get(
+    const response = await instance.post(
       `/api/course/removeStudentFromCourse/${studenId}`,
-      courseId
+      {
+        courseId: courseId,
+      }
     );
     return response.data;
   } catch (error) {
@@ -38,7 +52,7 @@ export const removeStudentFromCourse = async (studenId, courseId) => {
 // Create Course
 export const createCourse = async (course) => {
   try {
-    const response = await instance.get("api/course/", course);
+    const response = await instance.post("/api/course", course);
     return response.data;
   } catch (error) {
     return error;
@@ -48,7 +62,7 @@ export const createCourse = async (course) => {
 // Update Course
 export const updateCourse = async (courseId, course) => {
   try {
-    const response = await instance.get(`api/course/${courseId}`, course);
+    const response = await instance.put(`api/course/${courseId}`, course);
     return response.data;
   } catch (error) {
     return error;
