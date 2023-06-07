@@ -1,17 +1,26 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Box, Button } from "@mui/material";
-import { signinInputData } from "../../../config/data/signinInputData/SigninInputData";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Grid,
+  Link,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
+
 import { Input } from "../../common/inputs/SignupInput";
+
 import { SignInEmployee } from "../../../core/services/api/Employee-authentication.api";
-import { useNavigate, useLocation } from "react-router-dom";
+import { signinInputData } from "../../../config/data/signinInputData/SigninInputData";
 import { useAuth } from "../../../utils/auth/Auth";
 import { getItem } from "../../../core/services/storage/Storage";
 
-export const SigninForm = () => {
+export const SigninForm = ({ setSignUp }) => {
   const history = useNavigate();
-  const loacation = useLocation();
   const auth = useAuth();
 
   const formSchema = Yup.object().shape({
@@ -30,39 +39,31 @@ export const SigninForm = () => {
       }}
       validationSchema={formSchema}
       onSubmit={async (values) => {
-        console.log("values: ", values);
         const inputObj = {
           email: values.email,
           password: values.password,
         };
 
-        console.log("inputObj: ", inputObj);
         try {
           const response = await SignInEmployee(inputObj);
 
           if (response.success) {
-            console.log(response);
-            console.log("You are successfully signed in!");
-            console.log(
-              "Boolean(getItem(employee)) === false: ",
-              Boolean(getItem("employee")) === false
-            );
-            console.log("getItem(employee) === false: ", getItem("employee"));
+            toast.success("You are signed in successfully!");
 
             auth.login(Boolean(getItem("employee")) === true);
-            console.log(auth.isEmployee);
+
             history("/dashboard");
           } else {
-            console.log("Something went wrong! Please try again.");
+            toast.error("Something went wrong! Please try again.");
           }
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }}
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <Box>
+          <Box sx={{ mt: 5 }}>
             {signinInputData.map((data, index) => (
               <Input
                 key={index}
@@ -75,12 +76,35 @@ export const SigninForm = () => {
                 required={data.required}
               />
             ))}
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
           </Box>
+
           <Box display="flex" justifyContent="center" mt="20px">
-            <Button type="submit" color="secondary" variant="contained">
+            <Button
+              type="submit"
+              color="secondary"
+              variant="contained"
+              fullWidth
+              sx={{ mt: 3, mb: 2 }}
+            >
               sign up
             </Button>
           </Box>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2" onClick={() => setSignUp(true)}>
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       )}
     </Formik>
