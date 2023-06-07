@@ -1,13 +1,11 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { Layout } from "../../components/layout/Layout";
-import { privateRoutes } from "../../config/Routes";
-import { useAuth } from "../../utils/auth/Auth";
 
-export const Auth = ({ auth }) => {
-  const auth1 = useAuth();
-  console.log("isEmployee auth: ", auth.isEmployee);
-  console.log("isEmployee auth1: ", auth1.isEmployee);
+import { Layout } from "../../components/layout/Layout";
+
+import { Routes, Route } from "react-router-dom";
+import { privateRoutes } from "../../config/Routes";
+
+export const Auth = () => {
   return (
     <Routes>
       <Route
