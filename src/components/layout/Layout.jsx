@@ -1,23 +1,26 @@
 import React, { Fragment } from "react";
 import { SidebarSection } from "./sidebar/Sidebar";
-import { Footer } from "./footer/Footer";
 import { HomeHeader } from "./header/homeHeader/HomeHeader";
 import { Header } from "./header/authHeader/Header";
 import { Box } from "@mui/material";
-import { Outlet, Navigate, useLocation } from "react-router-dom";
-import { getItem } from "../../core/services/storage/Storage";
+import { Outlet } from "react-router-dom";
 
-export const Layout = ({ sidebarSection, homeHeader, footer }) => {
+export const Layout = ({ sidebarSection, homeHeader }) => {
   return (
     <Fragment>
-      <Box sx={{ display: "flex", height: "100vh" }}>
+      <Box
+        sx={{
+          display: "flex",
+          height: "auto",
+          width: "screen",
+        }}
+      >
         {sidebarSection && <SidebarSection />}
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ flex: "1", maxWidth: "100%", minWidth: "82%" }}>
           {homeHeader ? <HomeHeader /> : <Header />}
           <Outlet />
         </Box>
       </Box>
-      {footer && <Footer />}
     </Fragment>
   );
 };
