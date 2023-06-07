@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 
 export const CustomDatePicker = ({ name, label, required }) => {
   const formik = useFormikContext();
-  console.log(formik.values);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker"]}>
@@ -20,10 +20,17 @@ export const CustomDatePicker = ({ name, label, required }) => {
             value={formik.values.name}
             error={formik.touched[name] && !!formik.errors[name]}
             helperText={formik.touched[name] && formik.errors[name]}
+            defaultValue={dayjs(formik.initialValues[name])}
             onChange={(value) => {
               formik.setFieldValue(name, value);
             }}
             required={required}
+            textFieldStyle={{
+              width: "100%",
+              gridColumn: "span 4",
+              border: "1px solid red",
+            }}
+            style={{ width: "100%" }}
           />
         </DemoItem>
       </DemoContainer>
