@@ -21,6 +21,7 @@ export const Header = () => {
         display: "flex",
         justifyContent: "space-between",
         p: 1,
+        flex: "1 1 100%",
       }}
     >
       <IconButton
