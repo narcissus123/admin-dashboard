@@ -1,7 +1,7 @@
 export const signupInputData = [
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "text",
     label: "Full Name",
     name: "fullName",
@@ -10,7 +10,7 @@ export const signupInputData = [
   },
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "text",
     label: "Email",
     name: "email",
@@ -19,7 +19,7 @@ export const signupInputData = [
   },
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "text",
     label: "Password",
     name: "password",
@@ -28,7 +28,7 @@ export const signupInputData = [
   },
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "number",
     label: "Phone Number",
     name: "phoneNumber",
@@ -37,7 +37,7 @@ export const signupInputData = [
   },
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "text",
     label: "National Id",
     name: "nationalId",
@@ -46,7 +46,7 @@ export const signupInputData = [
   },
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "text",
     label: "Address",
     name: "address",
@@ -55,7 +55,7 @@ export const signupInputData = [
   },
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "text",
     label: "Profile",
     name: "profile",
@@ -75,7 +75,7 @@ export const signupInputData = [
   },
   {
     fullWidth: true,
-    variant: "filled",
+    variant: "outlined",
     type: "text",
     label: "Birth Date",
     name: "birthDate",
