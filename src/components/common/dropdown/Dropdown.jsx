@@ -4,7 +4,6 @@ import { Autocomplete, TextField, MenuItem } from "@mui/material";
 
 export const Dropdown = ({ name, options, sx, label, required }) => {
   const formik = useFormikContext();
-  console.log(formik.values[name]);
   return (
     <TextField
       name={name}
