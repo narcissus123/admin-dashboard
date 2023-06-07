@@ -15,13 +15,6 @@ export const Message = ({
 }) => {
   const [open, setOpen] = React.useState(false);
 
-  /* useEffect(
-    () => {
-      setOpen(true);
-    },
-    [status]
-  ); */
-
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
