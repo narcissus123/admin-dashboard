@@ -8,13 +8,14 @@ export const SignInEmployee = async (employeeInfo) => {
       employeeInfo
     );
 
-    const employee = JSON.stringify(response.data.result.employeeModel);
-    const token = response.data.result.jwtToken;
+    if (response.status === 200) {
+      const employee = JSON.stringify(response.data.result.employeeModel);
+      const token = response.data.result.jwtToken;
+      setItem("token", token);
+      setItem("employee", employee);
+    }
 
-    setItem("token", token);
-    setItem("employee", employee);
-
-    return response.data;
+    return response;
   } catch (error) {
     return error;
   }
