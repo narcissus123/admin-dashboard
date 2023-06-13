@@ -165,7 +165,11 @@ export const SignupForm = ({ setValue, setSignUp }) => {
           </Box>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link
+                variant="body2"
+                onClick={() => setSignUp(false)}
+                sx={{ cursor: "pointer" }}
+              >
                 Already have an account? Sign in
               </Link>
             </Grid>
