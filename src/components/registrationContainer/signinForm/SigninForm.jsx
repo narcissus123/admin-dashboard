@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -32,81 +32,89 @@ export const SigninForm = ({ setSignUp }) => {
       .required("This is required."),
   });
   return (
-    <Formik
-      initialValues={{
-        email: "",
-        password: "",
-      }}
-      validationSchema={formSchema}
-      onSubmit={async (values) => {
-        const inputObj = {
-          email: values.email,
-          password: values.password,
-        };
+    <>
+      <ToastContainer />
 
-        try {
-          const response = await SignInEmployee(inputObj);
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        validationSchema={formSchema}
+        onSubmit={async (values) => {
+          const inputObj = {
+            email: values.email,
+            password: values.password,
+          };
 
-          if (response.success) {
-            toast.success("You are signed in successfully!");
+          try {
+            const response = await SignInEmployee(inputObj);
 
-            auth.login(Boolean(getItem("employee")) === true);
+            if (response.status === 200) {
+              toast.success("You are signed in successfully!");
 
-            history("/dashboard");
-          } else {
-            toast.error("Something went wrong! Please try again.");
+              auth.login(Boolean(getItem("employee")) === true);
+
+              history("/dashboard");
+            } else {
+              if (response.status === 400) {
+                toast.error("Email or password is wrong.");
+              } else {
+                toast.error("Something went wrong! Please try again.");
+              }
+            }
+          } catch (error) {
+            console.error(error);
           }
-        } catch (error) {
-          console.error(error);
-        }
-      }}
-    >
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Box sx={{ mt: 5 }}>
-            {signinInputData.map((data, index) => (
-              <Input
-                key={index}
-                fullWidth={data.fullWidth}
-                variant={data.variant}
-                type={data.type}
-                label={data.label}
-                name={data.name}
-                sx={data.sx}
-                required={data.required}
+        }}
+      >
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Box sx={{ mt: 5 }}>
+              {signinInputData.map((data, index) => (
+                <Input
+                  key={index}
+                  fullWidth={data.fullWidth}
+                  variant={data.variant}
+                  type={data.type}
+                  label={data.label}
+                  name={data.name}
+                  sx={data.sx}
+                  required={data.required}
+                />
+              ))}
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
               />
-            ))}
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-          </Box>
+            </Box>
 
-          <Box display="flex" justifyContent="center" mt="20px">
-            <Button
-              type="submit"
-              color="secondary"
-              variant="contained"
-              fullWidth
-              sx={{ mt: 3, mb: 2 }}
-            >
-              sign up
-            </Button>
-          </Box>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+            <Box display="flex" justifyContent="center" mt="20px">
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
+                fullWidth
+                sx={{ mt: 3, mb: 2 }}
+              >
+                sign up
+              </Button>
+            </Box>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2" onClick={() => setSignUp(true)}>
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2" onClick={() => setSignUp(true)}>
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      )}
-    </Formik>
+          </form>
+        )}
+      </Formik>
+    </>
   );
 };
