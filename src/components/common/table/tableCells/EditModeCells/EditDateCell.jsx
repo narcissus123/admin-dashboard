@@ -24,7 +24,7 @@ const CustomPicker = styled(DatePicker)(({ theme }) => ({
     maxWidth: "0px",
   },
   "&.MuiFormControl-root": {
-    width: `20px !important`,
+    minWidth: "0px !important",
     color: `red !important`,
   },
 }));
@@ -70,7 +70,6 @@ const EditDateCell = (params) => {
               padding: "0px",
               margin: "0px",
               overflow: "hidden",
-              width: `400px !important`,
               backgroundColor: "red",
               border: "1px solid red",
             }}
