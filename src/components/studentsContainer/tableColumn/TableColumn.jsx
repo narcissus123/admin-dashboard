@@ -116,8 +116,8 @@ export const Columns = (
     {
       field: "birthDate",
       headerName: "Birth Date",
-      flex: 1,
       type: "date",
+      flex: 1,
       editable: true,
       valueGetter: (params) => {
         return new Date(params.row["birthDate"]);
