@@ -38,6 +38,10 @@ export const addEmployeeData = () => {
 
   let totalStudents = students.data.length;
 
+  let activeStudents = students.data.filter(
+    (student) => student.isActive === true
+  );
+
   const pieOptions = {
     legend: "none",
     pieSliceText: "label",
@@ -68,8 +72,35 @@ export const addEmployeeData = () => {
       ),
       pieData: [
         ["statistics", "percentage of active instructors"],
-        ["active", activeTeachers],
-        ["inactive", 1 - activeTeachers],
+        ["active", activeTeachers.filter((f) => f.isActive).length],
+        ["inactive", 1 - activeTeachers.filter((f) => !f.isActive).length],
+      ],
+      pieOptions: {
+        legend: "none",
+        pieSliceText: "label",
+        pieStartAngle: 100,
+        pieHole: 0.8,
+        backgroundColor: "transparent",
+        border: "non",
+      },
+      pieStyle: {
+        width: "70px",
+        height: "70px",
+      },
+    },
+    {
+      title: totalStudents,
+      subtitle: "Number of Students",
+
+      icon: (
+        <LocalLibraryOutlinedIcon
+          sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+        />
+      ),
+      pieData: [
+        ["statistics", "percentage of active students"],
+        ["active", activeStudents.filter((f) => f.isActive).length],
+        ["inactive", 1 - activeStudents.filter((f) => !f.isActive).length],
       ],
       pieOptions: {
         legend: "none",
@@ -95,8 +126,8 @@ export const addEmployeeData = () => {
       ),
       pieData: [
         ["statistics", "percentage of active instructors"],
-        ["read", validatedmessages],
-        ["not read", 1 - validatedmessages],
+        ["read", validatedmessages.filter((f) => f.verified).length],
+        ["not read", 1 - validatedmessages.filter((f) => !f.verified).length],
       ],
       pieOptions: {
         legend: "none",
@@ -117,33 +148,6 @@ export const addEmployeeData = () => {
 
       icon: (
         <MenuBookIcon
-          sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-        />
-      ),
-      pieData: [
-        ["statistics", "percentage of active instructors"],
-        ["read", validatedmessages],
-        ["not read", 1 - validatedmessages],
-      ],
-      pieOptions: {
-        legend: "none",
-        pieSliceText: "label",
-        pieStartAngle: 100,
-        pieHole: 0.8,
-        backgroundColor: "transparent",
-        border: "non",
-      },
-      pieStyle: {
-        width: "70px",
-        height: "70px",
-      },
-    },
-    {
-      title: totalStudents,
-      subtitle: "Number of Students",
-
-      icon: (
-        <LocalLibraryOutlinedIcon
           sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
         />
       ),
