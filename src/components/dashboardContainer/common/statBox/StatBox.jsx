@@ -3,8 +3,6 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../../global/theme/Theme";
 import PieChart from "../../../common/pieChart/PieChart";
 
-import ProgressCircle from "../../../common/progressCircle/ProgressCircle";
-
 const StatBox = ({
   title,
   subtitle,
@@ -36,7 +34,6 @@ const StatBox = ({
             pieOptions={pieOptions}
             pieData={pieData}
           />
-          {/* <ProgressCircle progress={progress} /> */}
         </Box>
       </Box>
       <Box display="flex" justifyContent="space-between" mt="2px">
