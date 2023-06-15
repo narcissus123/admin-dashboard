@@ -24,16 +24,24 @@ function Item(props) {
 const Slider = () => {
   var items = [
     {
-      name: "Random Name #1",
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMogjRLpwsVIRtPy7jobSXb-rBLnanihziGQ&usqp=CAU",
+      name: "Random Name #4",
+      src: "https://content.jdmagicbox.com/comp/pune/u1/020pxx20.xx20.220228140026.p1u1/catalogue/yash-computer-training-institute-aundh-pune-computer-training-institutes-7fulrujwkg.jpg",
     },
     {
-      name: "Random Name #2",
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOhU2H0NJqEgOeD7asUToPCKVYVT6ai_geIrEJX5izDuEzd6AXuRijEQ16t7mQsFjv3H0&usqp=CAU",
+      name: "Random Name #4",
+      src: "https://cdn.elearningindustry.com/wp-content/uploads/2018/01/5-tips-to-master-the-art-of-elearning-according-to-personality-type.jpg",
+    },
+    // {
+    //   name: "Random Name #4",
+    //   src: "https://media.istockphoto.com/id/469628658/photo/handicap-student-in-computer-lab.jpg?s=612x612&w=0&k=20&c=StaUKr2IGR7v5MZj4aNw_Gbtz-epXsCGMigcDrcKXqk=",
+    // },
+    {
+      name: "Random Name #4",
+      src: "https://www.theaccessgroup.com/media/iqslqxx1/elearning-by-experts-2x-1.jpg?anchor=center&mode=crop&width=820&height=460&rnd=132899481063800000",
     },
     {
-      name: "Random Name #2",
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV95naETG06q_qE0o-PooFVb9uPq5V6hkArQSOr_Fz2OhaYr9xQZHzDbwDTOEHzQ5MH_w&usqp=CAU",
+      name: "Random Name #4",
+      src: "https://aceit-training.com/ressources/images/89b42bdac3bf.jpg",
     },
   ];
 
