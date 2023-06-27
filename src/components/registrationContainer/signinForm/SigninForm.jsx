@@ -97,7 +97,7 @@ export const SigninForm = ({ setSignUp }) => {
                 fullWidth
                 sx={{ mt: 3, mb: 2 }}
               >
-                sign up
+                sign in
               </Button>
             </Box>
             <Grid container>
