@@ -171,4 +171,3 @@ export const addEmployeeData = () => {
     },
   ];
 };
-// <EmailIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
