@@ -36,7 +36,7 @@ export const RegistrationContainer = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              {signUp ? "Sign up" : "Sign in"}
             </Typography>
             <Box sx={{ mt: 1 }}>
               {signUp ? (
