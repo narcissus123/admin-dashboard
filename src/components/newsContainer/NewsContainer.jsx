@@ -13,7 +13,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { getNews } from "../../core/services/api/manage-news.api";
 
 const NewsContainer = () => {
-  //   /* Saving lesson information sent from server. */
+  /* Saving lesson information sent from server. */
   const [rows, setRows] = React.useState([]);
   const [rowSelectionModel, setRowSelectionModel] = React.useState([]);
 
@@ -43,7 +43,7 @@ const NewsContainer = () => {
     >
       <ToastContainer />
       <SubHeader
-        title="LESSONS"
+        title="NEWS & ARTICLES"
         color="secondary"
         sx={{ color: "secondary" }}
       />
