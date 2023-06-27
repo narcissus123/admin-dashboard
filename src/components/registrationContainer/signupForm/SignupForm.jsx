@@ -8,15 +8,11 @@ import { Box, Button, Grid, Link } from "@mui/material";
 import { signupInputData } from "../../../config/data/signupInputData/SignupInputData";
 import { Input } from "../../common/inputs/SignupInput";
 import { CustomDatePicker } from "../../common/datePicker/CustomDatePicker";
-import { CustomPhoneInput } from "../../common/phoneInput/CustomPhoneInput";
 
 import { Dropdown } from "../../common/dropdown/Dropdown";
 import { SignUpEmployee } from "../../../core/services/api/Employee-authentication.api";
 
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-// import ReactPhoneInput from "react-phone-input-material-ui";
-// import { TextField, withStyles } from "@material-ui/core";
 
 export const SignupForm = ({ setValue, setSignUp }) => {
   const formSchema = Yup.object().shape({
@@ -47,8 +43,8 @@ export const SignupForm = ({ setValue, setSignUp }) => {
         fullName: "",
         email: "",
         password: "",
-        phoneNumber: 2264638173,
-        birthDate: "",
+        phoneNumber: 0,
+        birthDate: new Date(),
         nationalId: "",
         address: "",
         role: "admin",
@@ -116,13 +112,6 @@ export const SignupForm = ({ setValue, setSignUp }) => {
                   label={data.label}
                   required={data.required}
                 />
-              ) : data.name === "phoneNumber" ? (
-                <CustomPhoneInput
-                  key={index}
-                  name={data.name}
-                  label={data.label}
-                  required={data.required}
-                />
               ) : (
                 <Input
                   key={index}
@@ -136,21 +125,6 @@ export const SignupForm = ({ setValue, setSignUp }) => {
                 />
               );
             })}
-            {/* <PhoneInput
-              country={"us"}
-              // value={this.state.phone}
-              // onChange={(phone) => this.setState({ phone })}
-              value={phoneValue}
-              onChange={setPhoneValue} */}
-            {/* /> */}
-            {/* <ReactPhoneInput
-              value={value}
-              defaultCountry={defaultCountry || "gb"}
-              onChange={onChange}
-              inputClass={classes.field}
-              dropdownClass={classes.countryList}
-              component={TextField}
-            /> */}
           </Box>
           <Box display="flex" justifyContent="center" mt="20px">
             <Button
