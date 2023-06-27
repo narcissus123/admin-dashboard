@@ -13,7 +13,7 @@ import { Columns } from "./tableColumn/TableColumn";
 import { Table } from "../../common/table/Table";
 
 const AdminContainer = () => {
-  //   /* Saving students information sent from backend. */
+  /* Saving students information sent from backend. */
   const [rows, setRows] = React.useState([]);
 
   const [rowSelectionModel, setRowSelectionModel] = React.useState([]);
