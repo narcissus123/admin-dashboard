@@ -79,7 +79,7 @@ export const signupInputData = [
     type: "text",
     label: "Birth Date",
     name: "birthDate",
-    sx: { gridColumn: "span 2" },
+    sx: { gridColumn: "span 4", width: "100%" },
     required: true,
   },
 ];
