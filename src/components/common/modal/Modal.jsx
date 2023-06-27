@@ -7,18 +7,6 @@ import { ModalHeader } from "./modalHeader/ModalHeader";
 
 import { tokens } from "../../../global/theme/Theme";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 export const CustomModal = ({
   setOpen,
   open,
@@ -44,7 +32,7 @@ export const CustomModal = ({
         sx={{
           width: "53%",
           typography: "body1",
-          margin: "10% auto",
+          margin: "1% auto",
           background: `${colors.primary[400]} !important`,
           borderRadius: "10px",
         }}
