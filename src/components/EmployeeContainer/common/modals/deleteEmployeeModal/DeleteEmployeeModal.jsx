@@ -25,7 +25,7 @@ const DeleteEmployeeModal = ({
       const response = await deleteEmployeeById(instructorId);
 
       if (response.data.success) {
-        setRows(rows.filter((row) => row.id !== lessonId));
+        setRows(rows.filter((row) => row.id !== instructorId));
         toast.success("Employee deleted successfully.");
       } else {
         toast.error("Sth went wrong. Please try again.");
