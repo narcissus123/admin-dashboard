@@ -13,7 +13,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { getAllLessons } from "../../core/services/api/manage-lessons.api";
 
 const LessonContainer = () => {
-  //   /* Saving lesson information sent from server. */
+  /* Saving lesson information sent from server. */
   const [rows, setRows] = React.useState([]);
   const [rowSelectionModel, setRowSelectionModel] = React.useState([]);
 
